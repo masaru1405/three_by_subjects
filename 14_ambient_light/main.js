@@ -20,6 +20,8 @@ function init(){
    directionalLight.position.y = 4
    directionalLight.intensity = 2
 
+   //Create a ambient light
+   const ambientLight = getAmbientLight(5)
 
    //See the FOV (field of view) of camera via directional light
    const helper = new THREE.CameraHelper(directionalLight.shadow.camera)
@@ -39,6 +41,7 @@ function init(){
    directionalLight.add(sphere) //add sphere into a pointLight
    scene.add(directionalLight)
    scene.add(helper)
+   scene.add(ambientLight)
 
    //Change camera position
    camera.position.x = 1
@@ -133,6 +136,13 @@ function getDirectionalLight(intensity, value=5){
    light.shadow.camera.bottom = - value
    light.shadow.camera.right = value 
    light.shadow.camera.top = value
+
+   return light
+}
+
+//Ambient light do not cast shadow and direction
+function getAmbientLight(intensity){
+   const light = new THREE.AmbientLight('rgb(10, 30, 50)', intensity)
 
    return light
 }
